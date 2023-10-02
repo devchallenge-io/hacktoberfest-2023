@@ -48,6 +48,7 @@ JSON com os dados e consumir localmente, ou até mesmo hardcode.
 - Implementar as funcionalidades minimas dos componentes ( Banner Slider, Tabs Post, Load More)
 - Para documentar o front end, você pode utilizar o [Storybook](https://storybook.js.org/).
 - Utilize algum kit de UI para facilitar o desenvolvimento, como o [Shadcn/ui](https://ui.shadcn.com/), [Radix UI](https://www.radix-ui.com/)
+- Deploy da aplicação, sugerimos o [Vercel](https://vercel.com/) ou [Netlify](https://www.netlify.com/).
 
 ### Observações
 
