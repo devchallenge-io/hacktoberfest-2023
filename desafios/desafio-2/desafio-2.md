@@ -15,6 +15,7 @@
   - [Aplicação](#aplicação)
   - [Objetivo](#objetivo)
   - [Requisitos](#requisitos)
+  - [Requisitos funcionais](#requisitos-funcionais)
   - [Extras](#extras)
 - [Comunidade](#comunidade)
 
@@ -36,6 +37,14 @@ O objetivo deste desafio é criar uma aplicação que permita o gerenciamento de
 - Poderá usar qualquer banco de dados, recomendamos o uso de [PostgreSQL](https://www.postgresql.org/), [SQLite](https://www.sqlite.org/index.html) ou [MongoDB](https://www.mongodb.com/).
 - Caso queria poderá usar algum ORM, recomendamos o uso do [Prisma](https://www.prisma.io/).
 
+### Requisitos funcionais
+
+- O usuário deve poder cadastrar um vídeo, informando o título, descrição e url.
+- O usuário deve poder editar um vídeo, informando o título, descrição e url.
+- O usuário deve poder excluir um vídeo.
+- O usuário deve poder visualizar um vídeo.
+- O usuário deve poder visualizar todos os vídeos.
+
 ### Extras
 
 - Caso opte por usar o NodeJS, recomendamos o uso do [TypeScript](https://www.typescriptlang.org/).
@@ -44,7 +53,6 @@ O objetivo deste desafio é criar uma aplicação que permita o gerenciamento de
 - Sugerimos para deploy do DB no [Neon](https://console.neon.tech/sign_in?ref=/).
 - Para deploy da API, recomendamos o [Render](https://render.com/).
 - Se quiser subir o nível, poderá criar niveis de acesso para os usuários, como por exemplo, usuário comum e administrador, em que o usuário comum só pode visualizar os vídeos e o administrador pode cadastrar, editar e excluir vídeos. E para isso faz-se necessário a criação de um sistema de autenticação, recomendamos o uso do [JWT](https://jwt.io/).
-
 
 ## Comunidade
 
