@@ -1,0 +1,36 @@
+# Utilizando a extensão REST Client do VSCode para testar as rotas da API
+# Podemos utilizar o Insomnia ou Postman também caso prefira.
+
+POST http://localhost:3333/videos
+Content-Type: application/json
+
+{
+  "title": "Hacktoberfest 2023",
+  "description": "Video 1 description",
+  "duration": 3600, // em segundos
+  "url": "https://www.youtube.com/"
+}
+
+
+###
+# GET http://localhost:3333/videos?search=node
+GET http://localhost:3333/videos
+
+###
+
+GET http://localhost:3333/videos/2d400107-bb57-4138-9709-1e6d747b09ca
+Content-Type: application/json
+
+###
+PUT http://localhost:3333/videos/60e96a31-39bd-4717-82df-fc3661a9ded6
+Content-Type: application/json
+
+{
+  "title": "Hacktoberfest 2023 new",
+  "description": "Video 0 description new",
+  "duration": 2600, 
+  "url": "https://www.youtube.com/"
+}
+
+###
+DELETE http://localhost:3333/videos/60e96a31-39bd-4717-82df-fc3661a9ded6
