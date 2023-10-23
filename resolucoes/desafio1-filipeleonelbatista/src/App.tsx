@@ -1,32 +1,24 @@
+import posts from "@/assets/posts";
 import Header from "@/components/header";
+import { ArrowRight, ListFilter } from "lucide-react";
+import { useMemo, useRef, useState } from "react";
 import Footer from "./components/footer";
-import posts from "@/assets/posts.json";
 import { Button } from "./components/ui/button";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { ListFilter, ArrowRight } from "lucide-react";
 
 import { register } from "swiper/element/bundle";
+import * as React from "react";
 register();
 
 function App() {
-  const swiperElRef = useRef(null);
-
-  useEffect(() => {
-    // listen for Swiper events using addEventListener
-    swiperElRef.current.addEventListener("progress", (e) => {
-      const [swiper, progress] = e.detail;
-      console.log(progress);
-    });
-
-    swiperElRef.current.addEventListener("slidechange", (e) => {
-      console.log("slide changed");
-    });
-  }, []);
+  const swiperElRef = useRef<HTMLDivElement | null>(null);
 
   const latestThreePosts = useMemo(() => {
     const sortedPosts = posts
       .slice()
-      .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+      .sort(
+        (a, b) =>
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
 
     return sortedPosts.slice(0, 3);
   }, [posts]);
@@ -34,7 +26,10 @@ function App() {
   const latestTwoPosts = useMemo(() => {
     const sortedPosts = posts
       .slice()
-      .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+      .sort(
+        (a, b) =>
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
 
     return sortedPosts.slice(0, 2);
   }, [posts]);
@@ -66,11 +61,13 @@ function App() {
     }
     if (selectOrder === "Up") {
       filteredArray.sort(
-        (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        (a, b) =>
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
       );
     } else if (selectOrder === "Down") {
       filteredArray.sort(
-        (a, b) => new Date(a.created_at) - new Date(b.created_at)
+        (a, b) =>
+          new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
       );
     }
 
@@ -103,32 +100,34 @@ function App() {
           css-mode="true"
         >
           {latestThreePosts.map((post, idx) => (
-            <swiper-slide key={idx}>
-              <div className="w-full h-fit relative">
-                <img
-                  className="w-full rounded h-96 object-cover"
-                  src={post.featured_images[0]}
-                />
-                <div className="absolute w-full flex justify-center bottom-0">
-                  <div className="-mb-16 drop-shadow-2xl rounded w-10/12 bg-white dark:bg-zinc-900 flex flex-col px-4 py-6 space-y-1">
-                    <p className="text-muted-foreground font-semibold">
-                      {post.category}
-                    </p>
-                    <h3 className="text-xl font-semibold">{post.title}</h3>
-                    <div className="flex flex-row items-center space-x-2">
-                      <img
-                        className="object-cover w-6 h-6 rounded-full"
-                        src={post.avatar}
-                      />
-                      <p className="text-sm font-semibold">{post.author}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {post.created_at}
+            <React.Fragment key={idx}>
+              <swiper-slide>
+                <div className="w-full h-fit relative">
+                  <img
+                    className="w-full rounded h-96 object-cover"
+                    src={post.featured_images[0]}
+                  />
+                  <div className="absolute w-full flex justify-center bottom-0">
+                    <div className="-mb-16 drop-shadow-2xl rounded w-10/12 bg-white dark:bg-zinc-900 flex flex-col px-4 py-6 space-y-1">
+                      <p className="text-muted-foreground font-semibold">
+                        {post.category}
                       </p>
+                      <h3 className="text-xl font-semibold">{post.title}</h3>
+                      <div className="flex flex-row items-center space-x-2">
+                        <img
+                          className="object-cover w-6 h-6 rounded-full"
+                          src={post.avatar}
+                        />
+                        <p className="text-sm font-semibold">{post.author}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {post.created_at}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </swiper-slide>
+              </swiper-slide>
+            </React.Fragment>
           ))}
         </swiper-container>
       </div>
