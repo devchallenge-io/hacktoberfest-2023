@@ -1,0 +1,32 @@
+{
+  "name": "upload-ai-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch ./src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "prisma migrate dev",
+    "db:init": "prisma init --datasource-provider sqlite",
+    "start:db": "prisma studio"
+  },
+  "author": "",
+  "license": "ISC",
+  "prisma": {
+    "seed": "tsx prisma/seeds.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.0",
+    "prisma": "^5.3.0",
+    "tsx": "^3.12.10",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@fastify/cors": "^8.3.0",
+    "@fastify/multipart": "^7.7.3",
+    "@prisma/client": "^5.3.0",
+    "dotenv": "^16.3.1",
+    "fastify": "^4.23.1",
+    "zod": "^3.22.2"
+  }
+}
