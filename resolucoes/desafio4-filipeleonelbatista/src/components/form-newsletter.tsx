@@ -6,14 +6,13 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
 export default function FormNewsletter() {
-  const form = useRef();
+  const form = useRef<HTMLFormElement | null>(null);
 
-  const sendEmail = (e) => {
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const { terms } = e.target;
-
-    if (terms[1].checked) {
+    
+    //@ts-ignore
+    if (form.current?.elements.terms.checked) {
       emailjs
         .sendForm(
           "service_4o2awb7",
