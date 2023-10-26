@@ -1,18 +1,43 @@
 import emailjs from "@emailjs/browser";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+
+interface MyFormValues {
+  name: string;
+  email: string;
+  terms: boolean;
+}
 
 export default function FormNewsletter() {
   const form = useRef<HTMLFormElement | null>(null);
 
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const formSchema = useMemo(() => {
+    return Yup.object().shape({
+      name: Yup.string().required("O Nome é obrigatório"),
+      email: Yup.string().required("O campo Email é obrigatório"),
+      terms: Yup.boolean(),
+    });
+  }, []);
 
-    //@ts-ignore
-    if (form.current?.elements[3].checked) {
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      terms: false,
+    },
+    validationSchema: formSchema,
+    onSubmit: (values: MyFormValues) => {
+      handleSubmitForm(values);
+    },
+  });
+
+  const handleSubmitForm = (formValues: MyFormValues) => {
+    if (formValues.terms) {
       emailjs
         .sendForm(
           "service_4o2awb7",
@@ -34,7 +59,11 @@ export default function FormNewsletter() {
   };
 
   return (
-    <form ref={form} onSubmit={sendEmail} className="flex flex-col space-y-6">
+    <form
+      ref={form}
+      onSubmit={formik.handleSubmit}
+      className="flex flex-col space-y-6"
+    >
       <h2 className="text-2xl font-semibold">Cadastre-se Agora!!!</h2>
       <p className="text-muted-foreground">
         Complete o cadastro para participar da newsletter e acessar as
@@ -43,7 +72,15 @@ export default function FormNewsletter() {
 
       <div className="space-y-2">
         <Label>Nome</Label>
-        <Input placeholder="Digite seu nome aqui" name="name" />
+        <Input
+          placeholder="Digite seu nome aqui"
+          name="name"
+          value={formik.values.name}
+          onChange={(event) => formik.setFieldValue("name", event.target.value)}
+        />
+        {!!formik.errors.name && (
+          <p className="text-sm text-red-600">{formik.errors.name}</p>
+        )}
       </div>
       <div className="space-y-2">
         <Label>Email</Label>
@@ -51,11 +88,26 @@ export default function FormNewsletter() {
           type="email"
           name="email"
           placeholder="Digite seu melhor email"
+          value={formik.values.email}
+          onChange={(event) =>
+            formik.setFieldValue("email", event.target.value)
+          }
         />
+
+        {!!formik.errors.email && (
+          <p className="text-sm text-red-600">{formik.errors.email}</p>
+        )}
       </div>
 
       <div className="flex items-center space-x-2">
-        <Checkbox id="terms" name="terms" />
+        <Checkbox
+          id="terms"
+          name="terms"
+          checked={formik.values.terms}
+          onCheckedChange={(value) => {
+            formik.setFieldValue("terms", value);
+          }}
+        />
         <Label htmlFor="terms" className="font-normal">
           Eu aceito os{" "}
           <u>
