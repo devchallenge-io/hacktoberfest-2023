@@ -2,6 +2,7 @@ import Header from "@/components/header";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ChevronRight } from "lucide-react";
 import HeroImage from "./assets/heroimage.png";
+import AcceptTerms from "./components/accept-terms";
 import FormNewsletter from "./components/form-newsletter";
 import { Button } from "./components/ui/button";
 
@@ -52,6 +53,7 @@ function App() {
           <FormNewsletter />
         </DialogContent>
       </div>
+      <AcceptTerms />
     </Dialog>
   );
 }
