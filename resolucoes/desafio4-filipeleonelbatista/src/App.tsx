@@ -8,7 +8,7 @@ import { Button } from "./components/ui/button";
 function App() {
   return (
     <Dialog>
-      <div className="flex w-screen h-screen flex-col bg-[#111829] items-center">
+      <div className="flex w-full h-screen overflow-x-hidden lg:overflow-hidden flex-col bg-[#111829] items-center">
         <Header />
         <div className="w-full max-w-[1024px] py-4 md:py-24 px-8 md:px-20 flex flex-col lg:flex-row items-center space-y-8">
           <div className="flex flex-col space-y-8 w-full md:w-1/2">

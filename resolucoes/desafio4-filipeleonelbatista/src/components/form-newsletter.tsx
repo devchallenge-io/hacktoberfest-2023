@@ -10,9 +10,9 @@ export default function FormNewsletter() {
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     //@ts-ignore
-    if (form.current?.elements.terms.checked) {
+    if (form.current?.elements[3].checked) {
       emailjs
         .sendForm(
           "service_4o2awb7",
